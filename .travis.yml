@@ -1,6 +1,8 @@
 dist: trusty
 language: java
-jdk:  oraclejdk8
+jdk:
+  - oraclejdk8
+  - oraclejdk9
 
 install:
   - "./gradlew clean jar"
@@ -50,7 +52,6 @@ jobs:
     - stage: deploy
       install: skip
       deploy:
-        provider: script
         script: "echo 'WHF'"
         on:
           all_branches: true
