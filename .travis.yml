@@ -17,19 +17,19 @@ jobs:
       script:
         - ./gradlew -p ./monolithic/ui check
       env:
-        COVERAGE = 0.3
+        COVERAGE = 0.5
     - script:
         - ./gradlew -p ./monolithic/service/cart check
       name: "Checks 2"
       install: skip
       env:
-        COVERAGE = 0.3
+        COVERAGE = 0.5
     - script:
         - ./gradlew -p ./monolithic/service/user check
       name: "Checks 3"
       install: skip
       env:
-        COVERAGE = 0.3
+        COVERAGE = 0.5
     - script:
         - ./gradlew -p ./monolithic/repository/order check
       name: "Checks 4"
@@ -41,13 +41,13 @@ jobs:
       name: "Checks 5"
       install: skip
       env:
-        COVERAGE = 0.3
+        COVERAGE = 0.5
     - script:
         - ./gradlew -p ./monolithic/repository/product check
       name: "Checks 6"
       install: skip
       env:
-        COVERAGE = 0.3
+        COVERAGE = 0.5
     - script:
         - ./gradlew -p ./monolithic/repository/user check
       name: "Checks 7"
