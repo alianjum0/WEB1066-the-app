@@ -49,6 +49,7 @@ jobs:
       install: skip
       env: COVERAGE=0.3
     - stage: deploy
+      script: skip
       install: skip
       deploy:
         script: "echo 'WHF'"
