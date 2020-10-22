@@ -69,10 +69,7 @@ jobs:
     script: skip
     deploy:
       provider: script
-      script: 'bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username  \"${DOCKER_USERNAME}\"
-        --password-stdin"
-
-'
+      script: 'bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username  \"${DOCKER_USERNAME}\" --password-stdin"'
       on:
         all_branches: true
 env:
