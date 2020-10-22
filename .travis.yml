@@ -1,11 +1,8 @@
 dist: trusty
 language: java
-jdk:
-  - oraclejdk8
 
-install:
-  - "./gradlew clean jar"
-
+install: "./gradlew clean jar"
+  
 stages:
   - test
   - deploy
@@ -13,44 +10,66 @@ stages:
 jobs:
   - include:
     - stage: test
-      name: "checks 1"
-      install: skip
-      script:
-        - ./gradlew -p ./monolithic/ui check
+      name: "checks 1 oraclejdk8"
+      jdk: oraclejdk8
+      script: ./gradlew -p ./monolithic/ui check
       env: COVERAGE=0.5
-    - script:
-        - ./gradlew -p ./monolithic/service/cart check
-      name: "Checks 2"
-      install: skip
+    - script: ./gradlew -p ./monolithic/service/cart check
+      name: "Checks 2 oraclejdk8"
+      jdk: oraclejdk8
       env: COVERAGE=0.5
-    - script:
-        - ./gradlew -p ./monolithic/service/user check
-      name: "Checks 3"
-      install: skip
+    - script: ./gradlew -p ./monolithic/service/user check
+      name: "Checks 3 oraclejdk8"
       env: COVERAGE=0.5
-    - script:
-        - ./gradlew -p ./monolithic/repository/order check
-      name: "Checks 4"
-      install: skip
+    - script: ./gradlew -p ./monolithic/repository/order check
+      name: "Checks 4 oraclejdk8"
+      jdk: oraclejdk8
       env: COVERAGE=0.3
-    - script:
-        - ./gradlew -p ./monolithic/repository/cart check
-      name: "Checks 5"
-      install: skip
+    - script: ./gradlew -p ./monolithic/repository/cart check
+      name: "Checks 5 oraclejdk8"
+      jdk: oraclejdk8
       env: COVERAGE=0.5
-    - script:
-        - ./gradlew -p ./monolithic/repository/product check
-      name: "Checks 6"
-      install: skip
+    - script: ./gradlew -p ./monolithic/repository/product check
+      name: "Checks 6 oraclejdk8"
+      jdk: oraclejdk8
       env: COVERAGE=0.5
-    - script:
-        - ./gradlew -p ./monolithic/repository/user check
-      name: "Checks 7"
-      install: skip
+    - script: ./gradlew -p ./monolithic/repository/user check
+      name: "Checks 7 oraclejdk8"
+      jdk: oraclejdk8
+      env: COVERAGE=0.3
+    - name: "checks 1 oraclejdk9"
+      jdk: oraclejdk9
+      script: ./gradlew -p ./monolithic/ui check
+      env: COVERAGE=0.5
+    - script: ./gradlew -p ./monolithic/service/cart check
+      name: "Checks 2 oraclejdk9"
+      jdk: oraclejdk9
+      env: COVERAGE=0.5
+    - script: ./gradlew -p ./monolithic/service/user check
+      name: "Checks 3 oraclejdk9"
+      jdk: oraclejdk9
+      env: COVERAGE=0.5
+    - script: ./gradlew -p ./monolithic/repository/order check
+      name: "Checks 4 oraclejdk9"
+      jdk: oraclejdk9
+      env: COVERAGE=0.3
+    - script: ./gradlew -p ./monolithic/repository/cart check
+      name: "Checks 5 oraclejdk9"
+      jdk: oraclejdk9
+      env: COVERAGE=0.5
+    - script: ./gradlew -p ./monolithic/repository/product check
+      name: "Checks 6 oraclejdk9"
+      jdk: oraclejdk9
+      env: COVERAGE=0.5
+    - script: ./gradlew -p ./monolithic/repository/user check
+      name: "Checks 7 oraclejdk9"
+      jdk: oraclejdk9
       env: COVERAGE=0.3
     - stage: deploy
-      script: skip
+      name: "Deploy oraclejdk8"
+      jdk: oraclejdk8
       install: skip
+      script: skip
       deploy:
         provider: script
         script: "echo 'WHF'"
