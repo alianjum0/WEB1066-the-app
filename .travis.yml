@@ -71,6 +71,7 @@ jobs:
       install: skip
       script: skip
       deploy:
+        provider: script
         script: "echo 'WHF'"
         on:
           all_branches: true
