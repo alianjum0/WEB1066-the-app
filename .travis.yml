@@ -8,8 +8,6 @@ jobs:
   - stage: deploy
     name: Deploy oraclejdk8
     jdk: oraclejdk8
-    install: skip
-    script: skip
     deploy:
       provider: script
       script: ./script/deployment.sh
