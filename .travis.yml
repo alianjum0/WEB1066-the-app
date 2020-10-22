@@ -67,7 +67,7 @@ jobs:
       env: COVERAGE=0.3
     - stage: deploy
       name: "Deploy oraclejdk8"
-      jdk: oraclejdk8i
+      jdk: oraclejdk8
       install: skip
       script: skip
       deploy:
