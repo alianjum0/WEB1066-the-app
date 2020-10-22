@@ -11,8 +11,7 @@ script:
   - "./gradlew test jacocoTestCoverageVerification"
 
 deploy:
-  - provider: script
-    script: 
-      - ECHO 'WHF'
-      on:
-        all_branches: true
+  provider: script
+  script: "echo 'WHF'"
+  on:
+    all_branches: true
