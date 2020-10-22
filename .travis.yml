@@ -1,8 +1,6 @@
 dist: trusty
 language: java
 jdk:  oraclejdk8
-env: 
-  - COVERAGE=0.3 
 
 install:
   - "./gradlew clean jar"
@@ -18,23 +16,48 @@ jobs:
       install: skip
       script:
         - ./gradlew -p ./monolithic/ui check
-        - ./gradlew -p ./monolithic/service/cart check
-        - ./gradlew -p ./monolithic/service/user check
       env:
         COVERAGE = 0.3
     - script:
-        - ./gradlew -p ./monolithic/repository/order check
-        - ./gradlew -p ./monolithic/repository/cart check
-        - ./gradlew -p ./monolithic/repository/product check
-        - ./gradlew -p ./monolithic/repository/user check
+        - ./gradlew -p ./monolithic/service/cart check
       name: "Checks 2"
       install: skip
       env:
         COVERAGE = 0.3
-       
-
-deploy:
-  provider: script
-  script: "echo 'WHF'"
-  on:
-    all_branches: true
+    - script:
+        - ./gradlew -p ./monolithic/service/user check
+      name: "Checks 3"
+      install: skip
+      env:
+        COVERAGE = 0.3
+    - script:
+        - ./gradlew -p ./monolithic/repository/order check
+      name: "Checks 4"
+      install: skip
+      env:
+        COVERAGE = 0.3
+    - script:
+        - ./gradlew -p ./monolithic/repository/cart check
+      name: "Checks 5"
+      install: skip
+      env:
+        COVERAGE = 0.3
+    - script:
+        - ./gradlew -p ./monolithic/repository/product check
+      name: "Checks 6"
+      install: skip
+      env:
+        COVERAGE = 0.3
+    - script:
+        - ./gradlew -p ./monolithic/repository/user check
+      name: "Checks 7"
+      install: skip
+      env:
+        COVERAGE = 0.3
+    - stage: deploy
+      install: skip
+      deploy:
+        provider: script
+        script: "echo 'WHF'"
+        on:
+          all_branches: true
