@@ -1,17 +1,58 @@
 dist: trusty
 language: java
-jdk:  oraclejdk8
+jdk:
+  - oraclejdk8
 
-install: "./gradlew clean jar"
+install:
+  - "./gradlew clean jar"
 
-script:
-  - "./gradlew test"
-  - "./gradlew jacocoTestReport"
-  - find . -name jacocoTestReport.csv|xargs cat|awk -F',' '{print $3" "$4" "$5}'
-  - "./gradlew test jacocoTestCoverageVerification"
+stages:
+  - test
+  - deploy
 
-deploy:
-  provider: script
-  script: "echo 'WHF'"
-  on:
-    all_branches: true
+jobs:
+  - include:
+    - stage: test
+      name: "checks 1"
+      install: skip
+      script:
+        - ./gradlew -p ./monolithic/ui check
+      env: COVERAGE=0.5
+    - script:
+        - ./gradlew -p ./monolithic/service/cart check
+      name: "Checks 2"
+      install: skip
+      env: COVERAGE=0.5
+    - script:
+        - ./gradlew -p ./monolithic/service/user check
+      name: "Checks 3"
+      install: skip
+      env: COVERAGE=0.5
+    - script:
+        - ./gradlew -p ./monolithic/repository/order check
+      name: "Checks 4"
+      install: skip
+      env: COVERAGE=0.3
+    - script:
+        - ./gradlew -p ./monolithic/repository/cart check
+      name: "Checks 5"
+      install: skip
+      env: COVERAGE=0.5
+    - script:
+        - ./gradlew -p ./monolithic/repository/product check
+      name: "Checks 6"
+      install: skip
+      env: COVERAGE=0.5
+    - script:
+        - ./gradlew -p ./monolithic/repository/user check
+      name: "Checks 7"
+      install: skip
+      env: COVERAGE=0.3
+    - stage: deploy
+      script: skip
+      install: skip
+      deploy:
+        provider: script
+        script: "echo 'WHF'"
+        on:
+          all_branches: true
